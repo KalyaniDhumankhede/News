@@ -1,0 +1,8 @@
+.filterBox{
+    position: absolute;
+    top: 53px;
+    left: 972px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 1;
+}

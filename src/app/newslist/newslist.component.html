@@ -1,0 +1,113 @@
+<div class="container">
+  <nav class="navbar navbar-light bg-light mx-5">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">News</a>
+      </div>
+      <div style="display: flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          [(ngModel)]="term"
+        />
+      </div>
+      <button (click)="open = !open">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          fill="currentColor"
+          class="bi bi-filter"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </button>
+      <div class="filterBox p-2" *ngIf="open">
+        <table class="p-3">
+          <tr>
+            <td>Country:-</td>
+            <td>
+              <Select (change)="selectedValue($event)">
+                <option value="in">India</option>
+                <option value="us">U.S.</option>
+                <option value="jp">Japan</option>
+              </Select>
+            </td>
+          </tr>
+          <tr>
+            <td>Date:-</td>
+            <td>
+              <label for="fromdate"
+                >From Date
+                <input
+                  type="date"
+                  name="fromdate"
+                  id=""
+                  [(ngModel)]="service.fromDate"
+                />
+              </label>
+              <label for="todate"
+                >To Date
+                <input
+                  type="date"
+                  name="todate"
+                  id=""
+                  [(ngModel)]="service.toDate"
+                />
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <button class="btn btn-primary m-1" (click)="FilterData()">
+                Show Data
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </nav>
+  <marquee
+    class="mx-5"
+    direction="right"
+    style="border: BLACK 1px SOLID; background-color: brown"
+  >
+    today's News
+  </marquee>
+  <div *ngFor="let news of service.articles | filter : term">
+    <a href="{{ news.url }}" target="_blank"  style="text-decoration: none">
+      <div
+        class="card"
+        style="display: flex; flex-direction: row; margin: 10px 50px"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              class="card-img-right"
+              src="{{ news.urlToImage }}"
+              alt="Card image cap"
+              width="320px"
+              height="273px"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ news.title }}</h5>
+              <p class="card-text">{{ news.description }}</p>
+              <p class="card-text" style="font-style: italic">
+                {{ news.author }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
